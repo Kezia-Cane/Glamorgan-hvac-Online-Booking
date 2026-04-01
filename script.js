@@ -29,53 +29,6 @@ accordionItems.forEach((item) => {
 
 // Smooth scrolling for in-page links with a small offset for the sticky header
 const anchorLinks = document.querySelectorAll('a[href^="#"]');
-const serviceTitanDirectLink = "https://scheduler.servicetitan.com/?brandId=brand_otm4scgo60cv7y4scvdd0s4s";
-const bookingModal = document.querySelector("[data-booking-modal]");
-const bookingFrame = document.querySelector("[data-booking-frame]");
-const bookingCloseTriggers = document.querySelectorAll("[data-booking-close]");
-
-const openBookingModal = () => {
-  if (!bookingModal || !bookingFrame) {
-    window.location.assign(serviceTitanDirectLink);
-    return;
-  }
-
-  if (!bookingFrame.getAttribute("src")) {
-    bookingFrame.setAttribute("src", serviceTitanDirectLink);
-  }
-
-  bookingModal.classList.add("is-open");
-  bookingModal.setAttribute("aria-hidden", "false");
-  document.body.classList.add("booking-modal-open");
-};
-
-const closeBookingModal = () => {
-  if (!bookingModal) {
-    return;
-  }
-
-  bookingModal.classList.remove("is-open");
-  bookingModal.setAttribute("aria-hidden", "true");
-  document.body.classList.remove("booking-modal-open");
-};
-
-window.showBookingScheduler = (event) => {
-  if (event) {
-    event.preventDefault();
-  }
-
-  openBookingModal();
-};
-
-bookingCloseTriggers.forEach((trigger) => {
-  trigger.addEventListener("click", closeBookingModal);
-});
-
-window.addEventListener("keydown", (event) => {
-  if (event.key === "Escape") {
-    closeBookingModal();
-  }
-});
 
 anchorLinks.forEach((link) => {
   link.addEventListener("click", (event) => {

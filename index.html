@@ -29,14 +29,14 @@
   <!-- Sticky Mobile CTA -->
   <div class="sticky-cta is-hidden" data-sticky-cta>
     <p>Save $500 each before peak summer installs fill up.</p>
-    <button
-      class="button button-primary se-booking-show"
-      type="button"
-      data-booking-trigger="true"
-      onclick="showBookingScheduler(event)"
-    >
-      Claim Spring Savings
-    </button>
+      <button
+        class="button button-primary se-booking-show"
+        type="button"
+        data-booking-trigger="true"
+        onclick="_scheduler.show({ schedulerId: 'sched_oyzszpzqvx9qjvia9v0nk6qn' })"
+      >
+        Claim Spring Savings
+      </button>
   </div>
 
   <!-- Site Header -->
@@ -58,7 +58,7 @@
         class="button button-secondary header-button se-booking-show"
         type="button"
         data-booking-trigger="true"
-        onclick="showBookingScheduler(event)"
+        onclick="_scheduler.show({ schedulerId: 'sched_oyzszpzqvx9qjvia9v0nk6qn' })"
       >
         Book Your Offer
       </button>
@@ -81,7 +81,7 @@
               class="button button-primary se-booking-show"
               type="button"
               data-booking-trigger="true"
-              onclick="showBookingScheduler(event)"
+              onclick="_scheduler.show({ schedulerId: 'sched_oyzszpzqvx9qjvia9v0nk6qn' })"
             >
               Claim Your Spring Offer
             </button>
@@ -371,7 +371,7 @@
             class="button button-primary button-full se-booking-show"
             type="button"
             data-booking-trigger="true"
-            onclick="showBookingScheduler(event)"
+            onclick="_scheduler.show({ schedulerId: 'sched_oyzszpzqvx9qjvia9v0nk6qn' })"
           >
             Schedule My Savings Consultation
           </button>
@@ -458,7 +458,7 @@
             class="button button-primary se-booking-show"
             type="button"
             data-booking-trigger="true"
-            onclick="showBookingScheduler(event)"
+            onclick="_scheduler.show({ schedulerId: 'sched_oyzszpzqvx9qjvia9v0nk6qn' })"
           >
             Book My Consultation
           </button>
@@ -496,41 +496,6 @@
       </p>
     </div>
   </footer>
-
-  <div class="booking-modal" data-booking-modal aria-hidden="true">
-    <div class="booking-modal-backdrop" data-booking-close></div>
-    <div class="booking-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="booking-modal-title">
-      <div class="booking-modal-header">
-        <div>
-          <p class="booking-modal-eyebrow">Online Booking</p>
-          <h2 id="booking-modal-title">Schedule Your Appointment</h2>
-        </div>
-        <div class="booking-modal-actions">
-          <a
-            class="button button-ghost booking-modal-link"
-            href="https://scheduler.servicetitan.com/?brandId=brand_otm4scgo60cv7y4scvdd0s4s"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Open in New Tab
-          </a>
-          <button class="booking-modal-close" type="button" aria-label="Close booking modal" data-booking-close>
-            <span></span>
-            <span></span>
-          </button>
-        </div>
-      </div>
-      <div class="booking-modal-frame-shell">
-        <iframe
-          class="booking-modal-frame"
-          data-booking-frame
-          title="Glamorgan HVAC online booking"
-          loading="lazy"
-          referrerpolicy="strict-origin-when-cross-origin"
-        ></iframe>
-      </div>
-    </div>
-  </div>
 
   <script
     data-api-key="z72tx2e8dyigicu5grh8fyxv"
