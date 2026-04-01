@@ -29,29 +29,34 @@ accordionItems.forEach((item) => {
 
 // Smooth scrolling for in-page links with a small offset for the sticky header
 const anchorLinks = document.querySelectorAll('a[href^="#"]');
-const serviceTitanSchedulerId = "sched_oyzszpzqvx9qjvia9v0nk6qn";
 const serviceTitanDirectLink = "https://scheduler.servicetitan.com/?brandId=brand_otm4scgo60cv7y4scvdd0s4s";
-const schedulerRetryLimit = 12;
-const schedulerRetryDelay = 250;
+const bookingModal = document.querySelector("[data-booking-modal]");
+const bookingFrame = document.querySelector("[data-booking-frame]");
+const bookingCloseTriggers = document.querySelectorAll("[data-booking-close]");
 
-const openServiceTitanDirectLink = () => {
-  window.location.assign(serviceTitanDirectLink);
+const openBookingModal = () => {
+  if (!bookingModal || !bookingFrame) {
+    window.location.assign(serviceTitanDirectLink);
+    return;
+  }
+
+  if (!bookingFrame.getAttribute("src")) {
+    bookingFrame.setAttribute("src", serviceTitanDirectLink);
+  }
+
+  bookingModal.classList.add("is-open");
+  bookingModal.setAttribute("aria-hidden", "false");
+  document.body.classList.add("booking-modal-open");
 };
 
-const openServiceTitanScheduler = (attempt = 0) => {
-  if (window._scheduler && typeof window._scheduler.show === "function") {
-    window._scheduler.show({ schedulerId: serviceTitanSchedulerId });
+const closeBookingModal = () => {
+  if (!bookingModal) {
     return;
   }
 
-  if (attempt >= schedulerRetryLimit) {
-    openServiceTitanDirectLink();
-    return;
-  }
-
-  window.setTimeout(() => {
-    openServiceTitanScheduler(attempt + 1);
-  }, schedulerRetryDelay);
+  bookingModal.classList.remove("is-open");
+  bookingModal.setAttribute("aria-hidden", "true");
+  document.body.classList.remove("booking-modal-open");
 };
 
 window.showBookingScheduler = (event) => {
@@ -59,17 +64,18 @@ window.showBookingScheduler = (event) => {
     event.preventDefault();
   }
 
-  if (
-    window.location.hostname === "localhost" ||
-    window.location.hostname === "127.0.0.1" ||
-    window.location.hostname === "::1"
-  ) {
-    openServiceTitanDirectLink();
-    return;
-  }
-
-  openServiceTitanScheduler();
+  openBookingModal();
 };
+
+bookingCloseTriggers.forEach((trigger) => {
+  trigger.addEventListener("click", closeBookingModal);
+});
+
+window.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    closeBookingModal();
+  }
+});
 
 anchorLinks.forEach((link) => {
   link.addEventListener("click", (event) => {
