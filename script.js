@@ -30,42 +30,17 @@ accordionItems.forEach((item) => {
 // Smooth scrolling for in-page links with a small offset for the sticky header
 const anchorLinks = document.querySelectorAll('a[href^="#"]');
 const bookingTriggers = document.querySelectorAll("[data-booking-trigger]");
-const serviceTitanSchedulerId = "sched_oyzszpzqvx9qjvia9v0nk6qn";
-const serviceTitanDirectLink = "https://scheduler.servicetitan.com/?brandId=brand_otm4scgo60cv7y4scvdd0s4s";
-const schedulerAllowedOrigins = new Set(["https://www.glamorgan-hvac.com"]);
-const schedulerRetryLimit = 12;
-const schedulerRetryDelay = 250;
+const serviceTitanDirectLink =
+  "https://glamorgan-hvac-online-booking.vercel.app/?spdirect=jgj2lyc6tj";
 
 const openDirectBooking = () => {
   window.location.assign(serviceTitanDirectLink);
-};
-
-const tryOpenEmbeddedScheduler = (attempt = 0) => {
-  if (window._scheduler && typeof window._scheduler.show === "function") {
-    window._scheduler.show({ schedulerId: serviceTitanSchedulerId });
-    return;
-  }
-
-  if (attempt >= schedulerRetryLimit) {
-    openDirectBooking();
-    return;
-  }
-
-  window.setTimeout(() => {
-    tryOpenEmbeddedScheduler(attempt + 1);
-  }, schedulerRetryDelay);
 };
 
 bookingTriggers.forEach((trigger) => {
   trigger.addEventListener("click", (event) => {
     event.preventDefault();
     event.stopPropagation();
-
-    if (schedulerAllowedOrigins.has(window.location.origin)) {
-      tryOpenEmbeddedScheduler();
-      return;
-    }
-
     openDirectBooking();
   });
 });
